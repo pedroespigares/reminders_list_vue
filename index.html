@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.js"
+      integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/4328465e5b.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <title>Reminder</title>
+  </head>
+  <body id="app">
+    <header>
+      <h1>Reminder - Pedro Espigares</h1>
+      <input
+        type="text"
+        id="reminder"
+        placeholder="¿Qué quieres recordar?"
+        v-model="texto"
+        v-model="campoFiltro"
+        @keyup.enter="nuevaNota"
+      />
+    </header>
+    <hr />
+    <p id="tareasPen">
+      <i class="fa-solid fa-chart-column"></i>
+      <span id="pendientes"
+        >{{totalEntradasNoRealizadas}} pendientes de un total de
+        {{totalEntradas}}</span
+      >
+      &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      <span id="deleteAll" @click="borrarNotasCompletadas"><i class="fa-solid fa-x"></i>Borrar tareas completadas</span>
+    </p>
+    <hr />
+    <main>
+      <div id="remindersContainer">
+        <div
+          class="singleReminder"
+          v-for="recordatorio in entradasFiltradas"
+          :key="recordatorio.id">
+
+          <div class="reminder--text">
+            <i v-if="recordatorio.hecho" class="fa-regular fa-check-circle" @click="checkNota(recordatorio)"></i>
+            <i v-else class="fa-regular fa-circle" @click="checkNota(recordatorio)"></i>
+            <h2 v-bind:class="{checked:recordatorio.hecho}">
+              {{recordatorio.titulo}}
+            </h2>
+            <i class="fa-solid fa-square-minus" @click="borrarNota(recordatorio)"></i>
+          </div>
+
+          <div class="reminder--data">
+            <p>Prioridad</p>
+            <button
+              id="low"
+              :class="[{marked:recordatorio.prioridad == 1}, {not_marked:recordatorio.priordad != 1}]"
+              @click="cambiarPrioridad(recordatorio,'low')">
+              <i class="fa-solid fa-arrow-down"></i>
+              Low
+            </button>
+            <button
+              id="medium"
+              :class="[{marked:recordatorio.prioridad == 2}, {not_marked:recordatorio.priordad != 2}]"
+              @click="cambiarPrioridad(recordatorio,'medium')">
+              Normal
+            </button>
+            <button
+              id="high"
+              :class="[{marked:recordatorio.prioridad == 3}, {not_marked:recordatorio.priordad != 3}]"
+              @click="cambiarPrioridad(recordatorio,'high')">
+              <i class="fa-solid fa-arrow-up"></i>
+              High
+            </button>
+            <i class='fa-regular fa-clock'></i>
+            <p>Añadido hace {{Math.floor(((Date.now() - recordatorio.fecha)/1000)/60)}} minutos</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>Desarrollado por Pedro Espigares</p>
+      <p>
+        Código disponible en
+        <a
+          href="https://github.com/pedroespigares/reminders-list"
+          target="_blank"
+          ><i class="fa-brands fa-github"></i> GitHub</a
+        >.
+      </p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
