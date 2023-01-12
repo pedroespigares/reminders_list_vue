@@ -61,7 +61,7 @@
             <p>Prioridad</p>
             <button
               id="low"
-              :class="[{marked:recordatorio.prioridad == 1}, {not_marked:recordatorio.priordad != 1}]"
+              :class="[{marked:recordatorio.prioridad == 1}, {not_marked:recordatorio.prioridad != 1}]"
               @click="cambiarPrioridad(recordatorio,'low')">
               <i class="fa-solid fa-arrow-down"></i>
               Low
