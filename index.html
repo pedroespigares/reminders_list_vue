@@ -26,17 +26,14 @@
         id="reminder"
         placeholder="¿Qué quieres recordar?"
         v-model="texto"
-        v-model="campoFiltro"
         @keyup.enter="nuevaNota"
       />
     </header>
     <hr />
     <p id="tareasPen">
       <i class="fa-solid fa-chart-column"></i>
-      <span id="pendientes"
-        >{{totalEntradasNoRealizadas}} pendientes de un total de
-        {{totalEntradas}}</span
-      >
+      <span id="pendientes">{{totalEntradasNoRealizadas}} pendientes de un total de
+        {{totalEntradas}}</span>
       &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <span id="deleteAll" @click="borrarNotasCompletadas"><i class="fa-solid fa-x"></i>Borrar tareas completadas</span>
     </p>
@@ -62,20 +59,20 @@
             <button
               id="low"
               :class="[{marked:recordatorio.prioridad == 1}, {not_marked:recordatorio.prioridad != 1}]"
-              @click="cambiarPrioridad(recordatorio,'low')">
+              @click="cambiarPrioridad(recordatorio, 1)">
               <i class="fa-solid fa-arrow-down"></i>
               Low
             </button>
             <button
               id="medium"
               :class="[{marked:recordatorio.prioridad == 2}, {not_marked:recordatorio.priordad != 2}]"
-              @click="cambiarPrioridad(recordatorio,'medium')">
+              @click="cambiarPrioridad(recordatorio, 2)">
               Normal
             </button>
             <button
               id="high"
               :class="[{marked:recordatorio.prioridad == 3}, {not_marked:recordatorio.priordad != 3}]"
-              @click="cambiarPrioridad(recordatorio,'high')">
+              @click="cambiarPrioridad(recordatorio, 3)">
               <i class="fa-solid fa-arrow-up"></i>
               High
             </button>

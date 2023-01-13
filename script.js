@@ -9,13 +9,7 @@ const { createApp } = Vue
     },
     methods: {
       cambiarPrioridad(entrada, prioridad){
-        if(prioridad == "low"){
-          entrada.prioridad = 1;
-        } else if(prioridad == "medium"){
-          entrada.prioridad = 2;
-        } else if(prioridad == "high"){
-          entrada.prioridad = 3
-        }
+        entrada.prioridad = prioridad;
         localStorage.setItem('recordatorios', JSON.stringify(this.recordatorios))
       },
 
