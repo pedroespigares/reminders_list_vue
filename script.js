@@ -52,7 +52,10 @@ const { createApp } = Vue
         return this.recordatorios.length;
       },
       entradasFiltradas(){
-        let arrayFilt = this.recordatorios.filter((entrada) => entrada.titulo.includes(this.texto));
+
+        // La funcion toLowerCase() es para que la busqueda sea insensible a mayusculas y minusculas
+        
+        let arrayFilt = this.recordatorios.filter((entrada) => entrada.titulo.toLowerCase().includes(this.texto.toLowerCase()));
         return arrayFilt.sort(function(a, b) {
           return b.prioridad - a.prioridad;
         });
